@@ -1,0 +1,331 @@
+Q : Power of 2
+#include <iostream>
+using namespace std;
+
+int poweroftwo(int n)
+    {
+        //base case
+        if(n==0)
+        return 1;
+        
+        return 2*poweroftwo(n-1);
+    }
+
+int main()
+{
+    int n=3;
+    cout<<poweroftwo(n);
+    return 0;
+}
+Q : Factorial :
+#include <iostream>
+using namespace std;
+
+int factorial(int n)
+    {
+        //base case
+        if(n==0)
+        return 1;
+        
+        return n*factorial(n-1);
+    }
+
+int main()
+{
+    int n;
+    cin>>n;
+    cout<<factorial(n);
+    return 0;
+}
+Q : Backward Counting
+#include <iostream>
+using namespace std;
+
+int counting(int n)
+    {
+        //base case
+        if(n==1)
+        return 1;
+        
+        cout<<n<<" ";
+        return counting(n-1);   //Tail Recursion
+    }
+
+int main()
+{
+    int n;
+    cin>>n;
+    cout<<counting(n);
+    return 0;
+}
+Q : Counting Forward
+#include <iostream>
+using namespace std;
+
+void counting(int n)
+    {
+        //base case
+        if(n==0)
+        return;
+        
+        counting(n-1);  //head recursion
+        cout<<n<<" ";
+    }
+
+int main()
+{
+    int n;
+    cin>>n;
+    counting(n);
+    return 0;
+}
+Q : Reach Home 
+#include <iostream>
+using namespace std;
+
+void reachHome(int src, int dest)
+    {
+        cout<<src<<endl;
+        //base case
+        if(src==dest){
+        cout<<"Phunch gaya";
+        return;}
+        
+        reachHome(src+1,dest);  //tail recursion
+    }
+
+int main()
+{
+    int src=1;
+    int dest=10;
+    reachHome(src,dest);
+    return 0;
+}
+Q: Fibonacci series : 
+#include <iostream>
+using namespace std;
+
+int fib(int n)
+    {
+        if(n==0)
+        {
+            return 0;
+        }
+        if(n==1)
+        {
+            return 1;
+        }
+        int ans=fib(n-1)+fib(n-2);
+        return ans;
+    }
+
+int main()
+{
+    int n;
+    cin>>n;
+    cout<<fib(n);
+    return 0;
+}
+Q : Climb Stairs
+#include <iostream>
+using namespace std;
+
+int climbstairs(int n)
+    {
+       if(n==0)
+       {
+           return 1;
+       }
+       if(n<0)
+       {
+           return 0;
+       }
+       return climbstairs(n-1)+climbstairs(n-2);
+    }
+
+int main()
+{
+    int n;
+    cin>>n;
+    cout<<climbstairs(n);
+    return 0;
+}
+Q : countdigits
+#include <iostream>
+using namespace std;
+
+void countdigits(int n, string arr[],int t)
+    {
+        if(n==0)
+       {
+           return;
+       }
+        int num=n%10;  //3,2,1
+
+       countdigits(n/10,arr,t); //12,1,0
+       cout<<arr[num]<<endl;
+    }
+int main()
+{
+    int n=123;
+    int t=10;
+    string arr[t]={"zero","one","two","three","four","five","six","seven","eight","nine"};
+    countdigits(n,arr,t);
+    return 0;
+}
+Q : Check if Array is sorted
+#include <iostream>
+using namespace std;
+
+bool isSorted(int arr[], int size)
+{
+    if(size==0||size==1)
+    {
+        return true;
+    }
+    if(arr[0]>arr[1])
+    {
+        return false;
+    }
+    else{
+    bool rem_part=isSorted(arr+1,size-1);
+    return rem_part;
+    }
+}
+
+int main()
+{
+    int n=8;
+    int arr[8]={2,4,5,6,8,9,11,212};
+    bool b=isSorted(arr,n);
+    if(b)
+    {
+        cout<<"It is Sorted";
+    }
+    else
+    {
+        cout<<"Not Sorted";
+    }
+    return 0;
+}
+Q : Get sum:
+#include <iostream>
+using namespace std;
+
+int arraysum(int arr[], int n){
+    int sum=0;
+    if(n==0)
+    {
+        return 0;
+    }
+    if(n==1)
+    {
+        return arr[0];
+    }
+    sum=arr[0]+arr[1];
+        int rem_part=arraysum(arr+2,n-2);
+        return rem_part+sum;
+}
+
+int main()
+{
+    int n=8;
+    int arr[8]={2,4,5,6,8,9,11,22};
+    cout<<arraysum(arr,n);
+    return 0;
+}
+Q : LinearSearch
+#include <iostream>
+using namespace std;
+
+bool arraychk(int arr[], int n, int key){
+    if(n==0)
+    {
+        return false;
+    }
+ if(key==arr[0])
+ {
+     return true;
+ }
+ else{
+ bool rem_part=arraychk(arr+1,n-1,key);
+ return rem_part;}
+}
+
+int main()
+{
+    int n=8;
+    int key;
+    cin>>key;
+    int arr[8]={2,4,5,6,8,11,13,22};
+    cout<<arraychk(arr,n,key);
+    return 0;
+}
+Q : Linear Search with print func
+#include <iostream>
+using namespace std;
+
+bool arraychk(int arr[], int n, int key){
+    for(int i=0;i<n;i++)
+    {
+        cout<<arr[i]<<" ";
+    }
+    cout<<endl;
+    if(n==0)
+    {
+        return false;
+    }
+ if(key==arr[0])
+ {
+     return true;
+ }
+ else{
+ bool rem_part=arraychk(arr+1,n-1,key);
+ return rem_part;}
+}
+
+int main()
+{
+    int n=8;
+    int key;
+    cin>>key;
+    int arr[8]={2,4,5,6,8,11,13,22};
+    cout<<arraychk(arr,n,key);
+    return 0;
+}
+Q: Binary Search using Recursion
+#include <iostream>
+using namespace std;
+
+bool arraychk(int arr[], int n,int s, int e, int key){
+    for(int i=s;i<=e;i++)
+    {
+        cout<<arr[i]<<" ";
+    }
+    cout<<endl;
+    bool ans;
+    if(s>e)
+    {
+        return false;
+    }
+    int mid=s+(e-s)/2;
+    if(arr[mid]==key)
+    {
+        return true;
+    }
+    else if(key>arr[mid]){
+    ans=arraychk(arr,n,mid+1,e,key);}
+    else{
+    ans=arraychk(arr,n,s,mid-1,key);}
+    return ans;
+}
+
+int main()
+{
+    int n=8;
+    int key;
+    cin>>key;
+    int arr[8]={2,4,5,6,8,11,13,22};
+    cout<<arraychk(arr,n,0,n-1,key);
+    return 0;
+}

@@ -1,0 +1,44 @@
+Subsets :
+class Solution {
+public:
+
+    void solve(vector<int>& nums,vector<vector<int>>&output, int index,vector<int>&ans)
+    {  
+         //base case
+        if(index>=nums.size()){
+        output.push_back(ans);
+        return;}
+
+        //exclude
+        solve(nums,output,index+1,ans);
+
+        //include
+        int element=nums[index];
+        ans.push_back(element);
+        solve(nums,output,index+1,ans);
+
+        ans.pop_back();
+    }
+    vector<vector<int>> subsets(vector<int>& nums) {
+        vector<int>ans;
+        vector<vector<int>>output;
+        int index=0;
+        solve(nums,output,index,ans);
+        return output;
+    }
+};
+int main()
+{
+      vector<int> nums = {1, 2, 3};
+    vector<vector<int>> s = subsets(nums);
+
+    // Print subsets
+    for (const auto& subset : s) {
+        for (const auto& num : subset) {
+            cout << num << " ";
+        }
+        cout << endl;
+    }
+
+    return 0;
+}

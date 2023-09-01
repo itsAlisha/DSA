@@ -1,0 +1,380 @@
+#include <iostream>
+using namespace std;
+
+class Node{
+    public:
+    int data;
+    Node* next;
+    //way 1 with constructors
+    
+    // Node(int data)
+    // {
+    //     this->data=data;
+    //     this->next=NULL;
+    // }
+};
+
+int main()
+{
+    Node *n1=new Node();
+    //way 2 without constructors
+    n1->data=15;
+    n1->next=NULL;
+    cout<<n1->data<<endl;
+    cout<<n1->next<<endl;
+    return 0;
+}
+INSERT AT HEAD :
+#include <iostream>
+using namespace std;
+
+class Node{
+    public:
+    int data;
+    Node* next;
+    //way 1 with constructors
+    Node(int data)
+    {
+        this->data=data;
+        this->next=NULL;
+    }
+};
+  void print(Node* &head)
+    {
+        Node*temp=head;
+        while(temp!=NULL)
+        {
+            cout<<temp->data<<" ";
+            temp=temp->next;
+        }
+        cout<<endl;
+    }
+    void Insertathead(Node*& head, int d)
+    {
+        Node*temp=new Node(d);
+        temp->next=head;
+        head=temp;
+        
+    }
+int main()
+{
+    Node *temp=new Node(12);
+    //way 2 without constructors
+    Node *node1=new Node(10);
+    Node*head=node1;
+    cout<<"head : ";
+    print(head);
+    cout<<"temp : ";
+    print(temp);
+    cout<<"temp inserted at front of head : "<<endl;
+    Insertathead(head,12);
+    print(head);
+    return 0;
+}
+INSERT AT TAIL :
+#include <iostream>
+using namespace std;
+
+class Node{
+    public:
+    int data;
+    Node* next;
+    //way 1 with constructors
+    Node(int data)
+    {
+        this->data=data;
+        this->next=NULL;
+    }
+};
+  void print(Node* &head)
+    {
+        Node*temp=head;
+        while(temp!=NULL)
+        {
+            cout<<temp->data<<" ";
+            temp=temp->next;
+        }
+        cout<<endl;
+    }
+    void Insertathead(Node*& head, int d)
+    {
+        Node*temp=new Node(d);
+        temp->next=head;
+        head=temp;
+        
+    }
+    void Insertattail(Node*& tail, int d)
+    {
+        Node*temp=new Node(d);
+        tail->next=temp;
+        tail=tail->next;
+        
+    }
+int main()
+{
+    Node *temp=new Node(12);
+    //way 2 without constructors
+    Node *node1=new Node(10);
+    Node*head=node1;
+    cout<<"head : ";
+    print(head);
+    cout<<"temp : ";
+    print(temp);
+    cout<<"temp inserted at front of head : "<<endl;
+    Insertathead(head,12);
+    Insertathead(head,57);
+    Insertathead(head,1);
+    print(head);
+    Node*tail=node1;
+    cout<<"temp inserted at tail: "<<endl;
+    Insertattail(tail,33);
+    print(head);
+    return 0;
+}
+INSERTION AT MIDDLE including at HEAD and TAIL :
+#include <iostream>
+using namespace std;
+
+class Node{
+    public:
+    int data;
+    Node* next;
+    //way 1 with constructors
+    Node(int data)
+    {
+        this->data=data;
+        this->next=NULL;
+    }
+};
+  void print(Node* &head)
+    {
+        Node*temp=head;
+        while(temp!=NULL)
+        {
+            cout<<temp->data<<" ";
+            temp=temp->next;
+        }
+        cout<<endl;
+    }
+    void Insertathead(Node*& head, int d)
+    {
+        Node*temp=new Node(d);
+        temp->next=head;
+        head=temp;
+        
+    }
+    void Insertattail(Node*& tail, int d)
+    {
+        Node*temp=new Node(d);
+        tail->next=temp;
+        tail=temp;
+        
+    }
+    void Insertatmid(Node*& head,Node*&tail,int position, int d)
+    {
+        if(position==0)
+        {
+            Insertathead(head,d);
+            return;
+        }
+        Node*temp=head;
+        int cnt=0;
+        while(cnt<position-1)
+        {
+            temp=temp->next;
+            cnt++;
+        }
+        Node*nodetoinsert=new Node(d);
+        nodetoinsert->next=temp->next;
+        temp->next=nodetoinsert;
+        if(nodetoinsert->next==NULL)
+        {
+            Insertattail(tail,d);
+            return;
+        }
+    }
+int main()
+{
+    Node *temp=new Node(12);
+    //way 2 without constructors
+    Node *node1=new Node(10);
+    Node*head=node1;
+    cout<<"head : ";
+    print(head);
+    cout<<"temp : ";
+    print(temp);
+    cout<<"temp inserted at front of head : "<<endl;
+    Insertathead(head,12);
+    Insertathead(head,57);
+    Insertathead(head,1);
+    print(head);
+    Node*tail=node1;
+    cout<<"temp inserted at tail of head : "<<endl;
+    Insertattail(tail,33);
+    Insertattail(tail,78);
+    print(head);
+    cout<<"temp inserted at middle : "<<endl;
+    Insertatmid(head,tail,3,44);
+    print(head);
+    Insertatmid(head,tail,6,99);
+    print(head);
+    Insertatmid(head,tail,0,19);
+    print(head);
+    Insertatmid(head,tail,9,39);
+    print(head);
+    Insertatmid(head,tail,10,50);
+    print(head);
+    cout<<head->data<<endl;
+    cout<<tail->data<<endl;
+    return 0;
+}
+DELETION AT HEAD,MID OR TAIL :
+#include <iostream>
+using namespace std;
+
+class Node{
+    public:
+    int data;
+    Node* next;
+    //way 1 with constructors
+    Node(int data)
+    {
+        this->data=data;
+        this->next=NULL;
+    }
+    ~Node(){
+        int value=this->data;
+        if(this->next!=NULL)
+        {
+            delete next;
+            this->next=NULL;
+        }
+    }
+};
+  void print(Node* &head)
+    {
+        Node*temp=head;
+        while(temp!=NULL)
+        {
+            cout<<temp->data<<" ";
+            temp=temp->next;
+        }
+        cout<<endl;
+    }
+    void Insertathead(Node*& head, int d)
+    {
+        Node*temp=new Node(d);
+        temp->next=head;
+        head=temp;
+        
+    }
+    void Insertattail(Node*& tail, int d)
+    {
+        Node*temp=new Node(d);
+        tail->next=temp;
+        tail=temp;
+        
+    }
+    void Insertatmid(Node*& head,Node*&tail,int position, int d)
+    {
+        if(position==0)
+        {
+            Insertathead(head,d);
+            return;
+        }
+        Node*temp=head;
+        int cnt=0;
+        while(cnt<position-1)    
+        {
+            temp=temp->next;
+            cnt++;
+        }
+        Node*nodetoinsert=new Node(d);
+        nodetoinsert->next=temp->next;
+        temp->next=nodetoinsert;
+        if(nodetoinsert->next==NULL)
+        {
+            Insertattail(tail,d);
+            return;
+        }
+    }
+    void deletenode(Node* &head,Node* &tail,int position)
+    {
+        //delete at head
+        if(position==0)
+        {
+            Node*temp=head;                 //    T=H ,H
+            head=head->next;
+            temp->next=NULL;          //important step
+            delete temp;
+            cout<<"Node at head deleted successfully"<<endl;
+            return;
+        }
+        //delete at middle or last
+        Node*current=head;
+        Node*prev=NULL;
+        int cnt=0;
+        while(cnt<position)
+        {
+            prev=current;
+            current=current->next;
+            cnt++;
+        }
+        prev->next=current->next;
+        current->next=NULL;
+        delete current;
+        cout<<"Node at mid deleted successfully"<<endl;
+        if(prev->next==NULL)
+        {
+            tail=prev;
+            tail->next==NULL;
+        cout<<"Node at tail deleted successfully"<<endl;
+            return;
+        }
+    }
+int main()
+{
+    Node *temp=new Node(12);
+    //way 2 without constructors
+    Node *node1=new Node(10);
+    Node*head=node1;
+    cout<<"head : ";
+    print(head);
+    cout<<"temp : ";
+    print(temp);
+    cout<<"temp inserted at front of head : "<<endl;
+    Insertathead(head,12);
+    Insertathead(head,57);
+    Insertathead(head,1);
+    print(head);
+    Node*tail=node1;
+    cout<<"temp inserted at tail of head : "<<endl;
+    Insertattail(tail,33);
+    Insertattail(tail,78);
+    print(head);
+    cout<<"temp inserted at middle : "<<endl;
+    Insertatmid(head,tail,3,44);
+    print(head);
+    Insertatmid(head,tail,6,99);
+    print(head);
+    Insertatmid(head,tail,0,19);
+    print(head);
+    Insertatmid(head,tail,9,39);
+    print(head);
+    Insertatmid(head,tail,10,50);
+    print(head);
+    cout<<head->data<<endl;
+    cout<<tail->data<<endl;
+    deletenode(head,tail,0);
+    print(head);
+    deletenode(head,tail,0);
+    print(head);
+    deletenode(head,tail,5);
+    print(head);
+    deletenode(head,tail,7);
+    print(head);
+    cout<<head->data<<endl;
+    cout<<tail->data<<endl;
+    return 0;
+}
+

@@ -1,0 +1,126 @@
+Q : Painter Partitioning using Recursion + Book Allocation : 
+#include <iostream>
+using namespace std;
+bool isPossible(int arr[],int size,int partition,int mid)
+{
+    int count=1;int a=0;
+    for(int i=0;i<size;i++){
+    if(a+arr[i]<=mid)
+    {
+        a=a+arr[i];
+    }
+    else
+    {
+        count++;
+        if(count>partition||arr[i]>mid)
+        {
+            return false;
+        }
+        a=arr[i];
+    }
+    }
+    return true;
+}
+
+int painterprob(int arr[],int size,int start, int end,int partition)
+{
+    for(int i=start;i<=end;i++)
+    {
+        cout<<i<<" ";
+    }
+    cout<<endl;
+    if(start>end)
+    {
+        return start;
+    }
+    int mid=start+(end-start)/2;
+    int ans;
+    if(isPossible(arr,size,partition,mid))
+    {
+        ans=mid;
+        return painterprob(arr,size,start,mid-1,partition);
+    }
+    else
+    {
+        return painterprob(arr,size,mid+1,end,partition);
+    }
+}
+
+int main()
+{
+    int arr[4]={1,2,3,4};
+    int partition=2;
+    int size=4;
+    int sum=0;
+    for(int i=0;i<size;i++)
+    {
+        sum=sum+arr[i];
+    }
+    int s=1,e=sum;
+    cout<<painterprob(arr,size,s,e,partition);
+    return 0;
+}
+Q : Aggressive cows : 
+#include <iostream>
+using namespace std;
+bool isPossible(int arr[], int size, int k,int mid)
+{
+    int count=1;
+    int lastpos=arr[0];
+    for(int i=0;i<size;i++){
+    if(arr[i]-lastpos>=mid)
+    {
+        lastpos=arr[i];
+        cout<<"Lastpos : "<<lastpos<<endl; 
+        count++;
+        cout<<"Count : "<<count<<endl;
+    }
+    
+    if(count==k)
+    {
+        return true;
+    }}
+    return false;
+}
+
+int largestmin(int arr[], int n, int k, int s, int e)
+{
+    for(int i=0;i<n;i++)
+    {
+        cout<<arr[i]<<" ";
+    }
+    cout<<endl;
+    int mid=s+(e-s)/2;
+    if(s>e)
+    {
+        return e;
+    }
+    cout<<endl<<"Mid : "<<mid<<endl;
+    if(isPossible(arr,n,k,mid))
+    {
+        return largestmin(arr,n,k,mid+1,e);
+    }
+    else
+    {
+        return largestmin(arr,n,k,s,mid-1);
+    }
+}
+
+int main()
+{
+    int k=3;
+    int arr[]={1,2,4,8,9};
+    int size=5;
+    int s=arr[0];
+    int maxi=0;
+    for(int i=0;i<size;i++)
+    {
+        if(arr[i]>maxi)
+        {
+            maxi=arr[i];
+        }
+    }
+    int e=maxi;
+    cout<<largestmin(arr,size,k,s,e);
+    return 0;
+}

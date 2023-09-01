@@ -1,0 +1,233 @@
+Q: Reverse string using Recursion 
+#include <bits/stdc++.h>
+using namespace std;
+
+void reverse(string &str, int start, int end)
+{
+    if(start>=end)
+    {
+        return;
+    }
+    swap(str[start],str[end]);
+    reverse(str,start+1,end-1);
+}
+
+int main()
+{
+    string str="babbar";
+    int n=str.length();
+    reverse(str,0,n-1);
+    cout<<str;
+    return 0;
+}
+Q : Using only one pointer :
+#include <bits/stdc++.h>
+using namespace std;
+
+void reverse(string &str, int start)
+{
+    int n=str.length();
+    if(start>=n-1-start)
+    {
+        return;
+    }
+    swap(str[start],str[n-1-start]);
+    reverse(str,start+1);
+}
+
+int main()
+{
+    string str="Maharana Pratap";
+    reverse(str,0);
+    cout<<str;
+    return 0;
+}
+Q : Palindrome string
+#include <bits/stdc++.h>
+using namespace std;
+
+void reverse(string &str, int start, int end)
+{
+    if(start>=end)
+    {
+        return;
+    }
+    swap(str[start],str[end]);
+    reverse(str,start+1,end-1);
+}
+
+int main()
+{
+    string str="abba";
+    string oldstring=str;
+    int n=str.length();
+    reverse(str,0,n-1);
+    cout<<str<<endl;
+    if(oldstring==str)
+    {
+        cout<<"Yes, its a Palindrome";
+    }
+    else
+    {
+        cout<<"No its not a Palindrome";
+    }
+    return 0;
+}
+Q : Check Palindrome
+#include <bits/stdc++.h>
+using namespace std;
+
+bool checkPaindrome(string str, int i, int j)
+{
+    if(i>j)
+    {
+        return true;
+    }
+    if(str[i]!=str[j])
+    {
+        return false;
+    }
+    checkPaindrome(str,i+1,j-1);
+    return true;
+}
+
+int main(){
+    string str="booloob";
+    int i=0;
+    int j=str.length()-1;
+    if(checkPaindrome(str,0,j))
+    {
+        cout<<"yes";
+    }
+    else
+    {
+        cout<<"No";
+    }
+        return 0;
+}
+Q : a ki power b:
+#include <bits/stdc++.h>
+using namespace std;
+
+int power(int a, int b)
+{
+    if(b==0)
+    return 1;
+    if(b==1)
+    return a;
+    if(a==1)
+    return 1;
+    if(a==0)
+    return 0;
+    
+    int ans=0;
+    if(b%2==0)
+    ans=power(a,b/2)*power(a,b/2);
+    else
+    ans=a*power(a,b/2)*power(a,b/2);
+    
+    return ans;
+}
+
+int main(){
+    int a=12,b=0;
+    cout<<power(a,b);
+    return 0;
+}
+Q : Bubble sort using recursion
+#include <bits/stdc++.h>
+using namespace std;
+
+void bubblesort(int arr[], int size)
+{
+    if(size==0 ||size==1)
+    {
+        return;
+    }
+    
+    for(int j=0;j<size-1;j++){
+    if(arr[j]>arr[j+1])
+    swap(arr[j],arr[j+1]);
+    }
+    bubblesort(arr,size-1);
+}
+
+int main(){
+    int arr[5]={2,7,1,3,6};
+    int size=5;
+    bubblesort(arr,size);
+    for(int i=0;i<size;i++)
+    {
+        cout<<arr[i]<<" ";
+    }
+    return 0;
+}
+Q: Selection sort using recursion :
+#include <bits/stdc++.h>
+using namespace std;
+
+void SelectionSort(int arr[], int size,int index)
+{
+    if(size-1==index)
+    return;
+    
+    int mini=index;
+    for(int j=index+1;j<size;j++)
+    {
+        if(arr[mini]>arr[j])
+        {
+            mini=j;
+        }
+    }
+    cout<<arr[mini]<<" "<<index<<" "<<size<<endl;
+    //if(index!=mini){
+    swap(arr[index],arr[mini]);
+    
+//}
+    
+    SelectionSort(arr,size,index+1);
+}
+
+int main()
+{
+    int n=5;
+    int arr[n]={5,3,2,4,6};
+    SelectionSort(arr,n,0);
+    for(int i=0;i<n;i++)
+    {
+        cout<<arr[i]<<" ";
+    }
+    return 0;
+}
+Q : Insertion sort:
+#include <bits/stdc++.h>
+using namespace std;
+
+void insertionsort(int arr[],int n)
+{
+    if(n==1||n==0)
+    return;
+    
+    insertionsort(arr,n-1);
+    
+    int temp=arr[n-1];  //likewise it is storing the value
+    int j=n-2;
+    while(j>=0 && arr[j]>temp)
+    {
+            arr[j+1]=arr[j];
+            j--;
+    }
+    arr[j+1]=temp;
+}
+
+int main()
+{
+   int n=5;
+   int arr[5]={9,7,2,3,1};       //7,9,2,3,1    2,7,9,3,1   2,3,7,9,1   1,2,3,7,9
+   insertionsort(arr,n);
+    for(int i=0;i<n;i++)
+   {
+       cout<<arr[i]<<" ";
+   }
+    return 0;
+}

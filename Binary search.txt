@@ -1,0 +1,346 @@
+#include <iostream>
+using namespace std;
+
+int binarysearch(int arr[], int start, int end, int key)
+{
+    int mid;
+    while(start<=end){
+    mid=start+(end-start)/2;
+    if(arr[mid]==key){
+    cout<<"FOUND at ";
+    return mid;
+    }
+    else if(key>arr[mid]){
+    start=mid+1;
+    }
+    else{
+    end=mid-1;
+    }
+    }
+    return -1;
+}
+
+int main()
+{
+    int arr[5]={6,7,8,9,10};
+    int key;
+    cin>>key;
+    int c=binarysearch(arr,0,4,key); 
+    cout<<c;
+}
+Q : First and Last occurence of element in an Array
+#include <iostream>
+using namespace std;
+
+int binarysearchfirst(int arr[], int n, int key)
+{
+    int s=0, e=n-1;
+    int mid,ans=-1;
+    while(s<=e){
+        mid=s+(e-s)/2;
+        if(arr[mid]==key)
+        {
+            ans=mid;
+            e=mid-1;
+        }
+        else if(arr[mid]<key)
+        {
+            s=mid+1;
+        }
+        else 
+        {
+            e=mid-1;
+        }
+    }
+    return ans;
+}
+    int binarysearchlast(int arr[], int n, int key)
+{
+    int s=0, e=n-1;
+    int mid,ans=-1;
+    while(s<=e){
+        mid=s+(e-s)/2;
+        if(arr[mid]==key)
+        {
+            ans=mid;
+            s=mid+1;
+        }
+        else if(arr[mid]<key)
+        {
+            s=mid+1;
+        }
+        else 
+        {
+            e=mid-1;
+        }
+    }
+    return ans;
+}
+int main()
+{
+      int arr[8]={0,0,1,1,2,2,2,2};
+      int first, second;
+      first=binarysearchfirst(arr,8,21);
+      second=binarysearchlast(arr,8,2);
+      cout<<first<<" "<<second;
+}
+Q: Peak in a mountain
+#include <iostream>
+using namespace std;
+
+int binarysearchpeak(int arr[], int n)
+{
+    int mid;
+    int start=0, end=n-1;
+    while(start<=end){
+    mid=start+(end-start)/2;
+    if(arr[mid-1]<arr[mid] && arr[mid]>arr[mid+1]){
+    cout<<"FOUND at ";
+    break;
+    }
+    else if(arr[mid+1]>arr[mid]){                       //1,4,5,6,9,10,8
+    start=mid+1;
+    }
+    else{
+    end=mid;                                           //8,9,16,7,8,5,1
+    }
+    }
+    return mid;
+}
+
+int main()
+{
+    int arr[6]={3,15,7,3,2,0};
+    int c=binarysearchpeak(arr,6); 
+    cout<<c;
+}
+Q : Pivot in an array 
+#include <iostream>
+using namespace std;
+
+int pivotinarr(int arr[], int n)
+{
+    int s=0,e=n-1,mid;
+    while(s<e)
+    {
+        mid=s+(e-s)/2;
+        if(arr[mid]>=arr[0])
+            s=mid+1;
+        else
+        e=mid;
+    }
+    return s;
+}
+
+int main()
+{
+    int arr[8]={3,5,7,13,1,2,5,9};
+    int c=pivotinarr(arr,8);
+    cout<<"Pivot is : "<<c;
+    return 0;
+}
+Q : Search an Element in a Sorted & Rotated array using Binary Search 
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int binarysearch(int arr[],int start, int end, int key)
+{
+    int mid;
+    while(start<=end)
+    {
+     mid=start+(end-start)/2;
+        if(key==arr[mid])
+        {
+            return mid;
+        }
+        else if(key>arr[mid])
+        {
+            start=mid+1;
+        }
+        else
+        end=mid-1;
+    }
+    return -1;
+}
+
+int pivotinarr(int arr[], int n)
+{
+    int s=0,e=n-1,mid;
+    while(s<e)
+    {
+        mid=s+(e-s)/2;
+        if(arr[mid]>=arr[0])
+            s=mid+1;
+        else
+            e=mid;
+    }
+return s;     
+}
+Q : Sq root of an integer in log n
+long long int binarysearchroot(int n)
+{
+   int start=1;
+   int end=n;
+   long long int mid,ans=0;
+while(start<=end)
+{
+    mid=start+(end-start)/2;
+    if(mid*mid==n)
+    return mid;
+    if (mid * mid < n) {
+    ans=mid;
+    start = mid + 1;
+    } 
+    else
+     end = mid - 1;
+}
+return ans;
+}
+
+int floorSqrt(int n)
+{
+   binarysearchroot(n);
+}
+
+
+int main()
+{
+    int arr[8]={13,15,17,19,1,2,3,9};
+    int s=pivotinarr(arr,8);
+    int k,n=8;
+    cin>>k;
+    if(arr[s]<=k && k<=arr[n-1]){
+    int c=binarysearch(arr,s,n-1,k);
+    cout<<c;}
+    else{
+    int d=binarysearch(arr,0,s-1,k);
+    cout<<d;}
+    return 0;
+}
+Q : Book Allocation and Painter's Partition :
+#include<iostream>
+#include<vector>
+using namespace std;
+
+bool isPossible(vector<int> &boards, int k,int n,int mid){
+    int i,b=0,count=1;
+    for(i=0;i<n;i++){
+     cout<<"b : "<<b<<endl;
+    if(b+boards[i]<=mid)
+    {
+        b=b+boards[i];
+        cout<<"1st Painter :"<<b<<endl;
+    }
+    else{
+        count++;
+        if (boards[i] > mid || count > k) {
+          return false;
+        }
+        b = boards[i];
+         cout<<"2nd Painter :"<<b<<endl;
+    }
+    }
+    return true;
+}
+
+int minmax(vector<int> &boards, int k)
+{
+    int sum=0,mid,ans=0;
+    int n=boards.size();
+    for(int i=0;i<n;i++)
+    {
+        sum=sum+boards[i];
+    }
+    int s=0,e=sum;
+    while(s<=e){
+    mid=s+(e-s)/2;
+    cout<<"Mid :"<<mid<<endl;
+    if(isPossible(boards, k,n,mid))
+    {
+        ans=mid;
+        e=mid-1;
+    }
+    else{
+       s=mid+1; 
+       cout<<"Start : "<<s<<endl;
+    }}
+    return ans;
+}
+
+int main()
+{
+    int k=2;
+    vector<int> boards;
+    boards.push_back(1);
+    boards.push_back(2);
+    boards.push_back(3);
+    boards.push_back(4);
+    int d=minmax(boards,k);
+    cout<<d;
+}
+Q : Aggressive cows
+#include<iostream>
+#include<vector>
+#include<algorithm>
+using namespace std;
+
+bool isPossible(vector<int> &stalls, int k,int mid, int n)
+{
+    int lastposition=stalls[0];
+    int count=1;
+    for(int i=0;i<n;i++)
+{
+   if(stalls[i]-lastposition>=mid){
+            lastposition=stalls[i];
+            cout<<"Last Position : "<<lastposition<<endl;
+            count++;
+            cout<<"Count : "<<count<<endl;
+        }
+        if(count==k)
+        {
+            return true;
+        }
+}
+ return false;
+}
+
+int largestmin(vector<int> &stalls, int k)
+{
+    sort(stalls.begin(),stalls.end());
+    int n=stalls.size();
+    int maxi=*max_element(stalls.begin(),stalls.end());
+    int s=0,e=maxi;
+    int mid,ans=0;
+    while(s<=e)
+    {
+        mid=s+(e-s)/2;
+        cout<<"Mid : "<<mid<<endl;
+        if(isPossible(stalls,k,mid,n))
+        {
+            ans=mid;
+            s=mid+1;
+        }
+        else
+        {
+            e=mid-1;
+        }
+    }
+    return ans;
+}
+
+int main()
+{
+    vector<int> stalls;
+    stalls.push_back(0);
+    stalls.push_back(3);
+    stalls.push_back(4);
+    stalls.push_back(7);
+    stalls.push_back(9);
+    stalls.push_back(10);
+    int k=4;
+   int d= largestmin(stalls,k);
+   cout<<d;
+   return 0;
+}
+

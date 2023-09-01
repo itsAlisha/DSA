@@ -1,0 +1,205 @@
+Q : Practice set 1
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    int i=777;
+    int *ptr=&i;
+    cout<<ptr<<"---->"<<*ptr<<endl;
+    
+    int *pqr=0;       //Another way of creating pointer
+    pqr=&i;
+    cout<<*pqr<<endl;
+    cout<<pqr;
+    
+    int *m=ptr;
+      cout<<"Before : "<<*m<<endl; //copied value of ptr into m and after incrementing value of ptr, value of m did change
+    *ptr=*ptr+1;
+    cout<<"After : "<<*m<<endl;
+    
+    *ptr=*ptr+1;              //copied value of ptr into q but after incrementing address of ptr, address of q didn't change
+    cout<<*ptr<<endl;
+    int *q=ptr;
+    cout<<q<<"---->"<<*q<<endl;
+    ptr=ptr+1;
+    cout<<endl<<ptr<<endl;
+    cout<<q<<endl;
+    return 0;
+}
+Q: Practice set 2
+#include <iostream>
+using namespace std;
+
+int main() {
+    int firstvalue = 5, secondvalue = 15;
+    char thirdvalue = 'a';
+    int * p1, * p2;
+    char * p3;
+        p1 = & firstvalue; // p1 = address of firstvalue
+        cout<<p1<<"  =  "<<&firstvalue<<endl;
+        p2 = & secondvalue; // p2 = address of secondvalue
+        cout<<p2<<"  =  "<<&secondvalue<<endl;
+        p3 = & thirdvalue; // p3 = address of thirdvalue
+        cout<<(void*)p3<<"  =  "<<(void*)&thirdvalue<<endl;
+        * p1 = 10; // value pointed to by p1 = 10
+        cout<<*p1<<endl;
+        * p2 = * p1; // value pointed to by p2 = value pointed to by p1,        value krde p1 ki set p2 me
+        cout<<*p2<<endl;
+        p1 = p2; // p1 = p2 (value of pointer is copied),             p1 point krega p2 ko
+        cout<<p1<<"   =   "<<p2<<endl;
+        * p1 = 20; // value pointed to by p1 = 20
+        * p3 = 'b'; // value pointed to by p3 = ‘b ’
+    cout << "firstvalue is " << firstvalue << endl;
+    cout << "secondvalue is " << secondvalue << endl;
+    cout << "thirdvalue is " << thirdvalue << endl;
+    cout<<p1<<"   =   "<<*p1<<endl;
+    cout<<p2<<"   =   "<<*p2<<endl;
+    cout<<(void*)p3<<"   =   "<<*p3<<endl;
+return 0;
+}
+/*Comments : we changed value of firstvalue and no ptr is pointing to it, its pointer is now pointing to secondvalue
+and p2 is also pointing to secondvalue, changing *p1 changes value of secondvalue where both p1 and p2 are pointing now and 
+p3 has its own changed value.
+*/
+Q : Pointers and Arrays : 
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    int arr[]={1,2,3,4,5};
+    int *ptr=&arr[2];
+    cout<<arr<<endl;
+    cout<<&arr[0]<<endl;
+    cout<<*arr<<endl;
+    cout<<(*arr+2)<<endl;
+    cout<<sizeof(arr)<<endl;
+    cout<<sizeof(ptr)<<endl;
+    cout<<ptr<<endl;
+    cout<<*ptr<<endl;
+    cout<<&ptr<<endl;
+    cout<<sizeof(*ptr)<<endl;
+    cout<<sizeof(&ptr)<<endl; 
+    cout<<sizeof(&arr)<<endl;
+    cout<<sizeof(*arr)<<endl;
+    char ch[7]="abcdef";
+    cout<<ch<<endl;
+    cout<<*ch<<endl;  //first character only
+    cout<<&ch<<endl;
+    char *p=&ch[0];
+    cout<<p<<endl;        // works as ch printed
+    cout<<*p<<endl;
+    cout<<&p<<endl;
+    
+         char *chh="hello";   //don't create this way, its risky
+         cout<<chh<<endl;
+         cout<<*chh<<endl;
+         cout<<&chh<<endl;
+    
+    return 0;
+}
+Q : Pointers and Functions : 
+#include <iostream>
+using namespace std;
+
+void print(int *p)
+    {
+        *p=*p+200;
+        *p=*p*2;
+        cout<<*p;
+    }
+int getsum(int *arr, int n)       //either write usual int arr[] or write int *arr as parameter
+    {
+        
+        cout<<"Size : "<<sizeof(arr)<<endl;
+        int sum=0;
+        for(int i=0;i<n;i++){
+        sum=sum+arr[i];
+        }
+        return sum;
+    }
+
+int main()
+{
+    int value=5;
+    int *p=&value;
+    cout<<"Before : "<<value<<endl;
+    cout<<"After : ";
+    print(p);
+    int arr[5]={1,2,3,4,5};
+    cout<<endl<<getsum(arr,5);
+    return 0;
+}
+Q : Double Pointers :
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    int i=5;       //710
+    int *p=&i;       //820
+    int **p2=&p;       //940
+    cout<<p<<endl;         //710 printed
+    cout<<&p<<endl;        //820
+    cout<<*p2<<endl;       //710
+    cout<<i<<endl;         //5
+    cout<<*p<<endl;        //5
+    cout<<**p2<<endl;      //5
+    cout<<&i<<endl;        //710
+    cout<<p<<endl;         //710
+    cout<<*p2<<endl;       //710
+    cout<<&p<<endl;        //820
+    cout<<p2<<endl;        //820
+
+    return 0;
+}
+Q : Double Pointer Functions :
+#include <iostream>
+using namespace std;
+
+void update(int **p2)
+{
+    //cout<<"p2 :"<<p2<<endl;
+    //p2=p2+1;
+    //cout<<"p2 :"<<p2<<endl;
+    //*p2=*p2+1;
+    **p2=**p2+1;
+}
+
+int main()
+{
+   int i=5;
+   int *p=&i;
+   int **p2=&p;
+   cout<<"Before : "<<endl;
+   cout<<i<<endl;       //5
+   cout<<p<<endl;       //710     pointer alone like p or p2 will only point address
+   cout<<p2<<endl;      //820
+   update(p2);
+   cout<<"After : "<<endl;
+   cout<<i<<endl;
+   cout<<p<<endl;
+   cout<<p2<<endl;
+    return 0;
+}
+Q : POINTER : BAD PRACTICE
+#include <iostream>
+using namespace std;
+//POINTER : BAD PRACTICE
+int* update(int n)
+   {
+       n++;
+       int *ans=&n;
+       return *ans;  //*ans limited to this block only
+   }
+    
+
+int main()
+{
+    int n=5;
+    cout<<"Before : "<<n<<endl;
+    update(n);
+    cout<<"After : "<<n;
+    return 0;
+}

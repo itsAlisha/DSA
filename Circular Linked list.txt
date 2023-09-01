@@ -1,0 +1,177 @@
+#include <iostream>
+using namespace std;
+
+class Node{
+    public:
+    int data;
+    Node*next;
+    
+    Node(int data)
+    {
+        this->data=data;
+        this->next=NULL;
+    }
+    ~Node()
+    {
+        int value=this->data;
+        while(next!=NULL){
+        delete next;
+        this->next=NULL;}
+    }
+};
+void insertnode(Node* &tail, int value1, int value2)
+{
+    if(tail==NULL)
+    {
+        Node *n1=new Node(value2);
+        tail=n1;
+    }
+    Node*curr=tail;
+    while(curr->data!=value1)
+    {
+        curr=curr->next;
+    }
+    Node* temp=new Node(value2);
+    temp->next=curr->next;
+    curr->next=temp;
+    
+}
+void print(Node*tail)
+{
+    if(tail==NULL)
+    {
+        cout<<"Empty CLL"<<endl;
+    }
+    cout<<tail->data<<" ";
+    Node*temp=tail;               //temp tail pe rhe rhi hai aur tail move krke aa rhi hai
+    while(tail->next!=temp) {
+    cout<<tail->data<<" ";    
+    tail=tail->next;
+    }
+    cout<<endl;
+}
+int main()
+{
+    Node *n1=new Node(5);
+    Node*tail=n1;
+    print(tail);
+    insertnode(tail,5,7);
+    print(tail);
+    return 0;
+}
+Insertion and Deletion :
+#include <iostream>
+using namespace std;
+
+class Node{
+    public:
+    int data;
+    Node*next;
+    
+    Node(int data)
+    {
+        this->data=data;
+        this->next=NULL;
+    }
+    ~Node()
+    {
+        int value=this->data;
+        if(next!=NULL){
+        delete next;
+        this->next=NULL;}
+    }
+};
+void print(Node*tail)
+{ cout<<"Hi, i m tail : "<<tail->data<<endl;
+    if(tail->next==NULL)
+    {
+        cout<<"Empty CLL"<<endl;
+    }
+     
+    else{
+         Node*temp1 =tail;
+         cout<<temp1->data<<" ";  //5
+         temp1=temp1->next;   //7
+         while(tail!=temp1){
+         cout<<temp1->data<<" ";
+         temp1=temp1->next;
+         }
+         cout<<endl;
+}}
+
+void insertnode(Node* &tail, int value1, int value2)
+{
+    if(tail==NULL)
+    {
+        Node *n1=new Node(value2);
+        tail=n1;
+        n1->next=n1;
+    }
+    else{
+    Node*curr=tail;
+    while(curr->data!=value1)
+    {
+        curr=curr->next;    //7
+    }
+    Node* temp=new Node(value2);   //9
+    temp->next=curr->next;
+    curr->next=temp;
+    }
+}
+void deletednode(Node* &tail, int value)
+{
+    if(value==tail->data)
+    {
+        tail=tail->next;
+    }
+    Node*curr=tail;
+    Node*temp;                           //curr=5, value=8
+    while(curr->data!=value)             //temp=5 curr=1 temp=1 curr=7 temp=7 curr=8
+    {
+        temp=curr;
+        curr=curr->next;
+    }
+     if(curr==temp)
+     {
+         tail==NULL;
+         tail->data=NULL;
+         tail->next=NULL;
+         return;
+     }
+    temp->next=curr->next;
+    curr->next=NULL;
+    delete curr;
+}
+int main()
+{
+    Node *n1=new Node(5);
+    Node*tail=n1;
+    tail->next=tail;
+     insertnode(tail,5,7);
+    print(tail);
+     insertnode(tail,7,9);
+    print(tail);
+     insertnode(tail,7,8);
+    print(tail);
+     insertnode(tail,5,1);
+    print(tail);
+     insertnode(tail,9,4);
+    print(tail);
+     insertnode(tail,8,2);
+    print(tail);
+    deletednode(tail,8);
+    print(tail);
+    deletednode(tail,9);
+    print(tail);
+    deletednode(tail,1);
+    print(tail);
+    deletednode(tail,5);
+    print(tail);
+    deletednode(tail,7);
+    print(tail);
+    deletednode(tail,4);
+    print(tail);
+    deletednode(tail,2);
+    print(tail);
+    return 0;
+}

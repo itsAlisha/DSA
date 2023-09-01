@@ -1,0 +1,221 @@
+Q: Length of string :
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    char arr[20];
+    cin>>arr;
+    int count=0;
+    int i=0;
+    while(arr[i]!='\0')
+    {
+        count++;
+        i++;
+    }
+    cout<<"Length of string is : "<<count;
+    return 0;
+}
+Q:Reverse of a string 
+#include <iostream>
+using namespace std;
+
+void reverse(char arr[],int n)
+{
+    int s=0;
+    int e=n-1;
+    while(s<e)
+    {
+        swap(arr[s],arr[e]);
+        s++;  //2  3
+        e--;  //5  4
+    }
+    cout<<"Reverse is : "<<endl;
+        cout<<arr;
+}
+
+int main()
+{
+    char arr[20];
+    cin>>arr;
+    int i=0,count=0;
+    while(arr[i]!='\0')
+    {
+        count++;
+        i++;
+    }
+    reverse(arr,count);
+}
+Q : Palindrome:
+#include <bits/stdc++.h>
+using namespace std;
+
+void reverse(string st,int n)
+{
+    string str=st;
+    int s=0;
+    int e=n-1;
+    while(s<e)
+    {
+        swap(str[s],str[e]);
+        s++;  //2  3
+        e--;  //5  4
+    }
+    cout<<"Reverse is : "<<endl;
+        cout<<str<<endl;
+        if(str==st)
+            cout<<"Yes, it is a palindrome";
+        else
+            cout<<"No, its not";
+}
+
+int main()
+{
+    string str="A1b22Ba";
+    int count=str.length();
+    reverse(str,count);
+    
+}
+Q : blank space replace :
+#include <bits/stdc++.h>
+using namespace std;
+
+string replaceSpaces(string &str){
+    char ch;
+	for(int i=0;i<str.length();i++){
+	 ch=str[i];
+        if (ch == ' ') {
+			str[i]='@';
+			cout<<"This is i : "<<i<<endl;
+        }
+        else{
+            continue;
+        }
+        }
+		return str;
+}
+int main()
+{
+    string str="Hello World";
+    string k=replaceSpaces(str);
+    cout<<k;
+    return 0;
+}
+Q: String permutations
+#include <iostream>
+using namespace std;
+bool checkequal(int arr1[26], int arr2[26])
+{
+    for(int i=0;i<26;i++)
+    {
+        if(arr1[i]!=arr2[i])
+        {
+            return false;
+        }
+    }
+    return true;
+}
+
+bool checkInclusion(string s1, string s2) {   
+    int count1[26]={0};
+    for(int i=0;i<s1.length();i++)
+    {
+        int number=s1[i]-'a';
+        count1[number]++;
+    }
+
+    int count2[26]={0};
+    int i;
+    for(i=0;i<s1.length();i++)
+    {
+        int number=s2[i]-'a';
+        count2[number]++;
+    }
+     if(checkequal(count1,count2))
+      {
+          return true;
+      }
+   while(i<s2.length() && i<s1.length())
+    {
+            char newchar=s2[i];
+            int number=newchar-'a';
+            count2[number]++;
+
+            char oldchar=s2[i-s1.length()];
+            number=oldchar-'a';
+            count2[number]--;
+      i++;
+      for(auto j:count2)
+      {
+          cout<<j<<" ";
+      }
+                cout<<endl;
+      if(checkequal(count1,count2))
+      {
+          return true;
+      }
+    }
+    return false;
+    }
+
+int main()
+{
+    string s1="ab";
+    string s2="a";
+    bool b=checkInclusion(s1,s2);
+    cout<<b;
+
+    return 0;
+}
+Q : Remove adjacent duplicates
+class Solution {
+public:
+   string removeDuplicates(string s) {
+        int i=0;
+        int n=s.length();
+        while(i<n)
+        {
+           if(s[i]==s[i+1]){
+           s.erase(i,2);
+           if(i>0)
+           {
+               i--;
+           }
+           n-=2;}
+           else
+           {
+               i++;
+           }
+        }
+        return s;
+   }
+};
+Q:stringcompression 
+class Solution {
+public:
+    int compress(vector<char>& chars) {
+        int i=0;
+        int n=chars.size();
+        int ansindex=0;
+        while(i<n)
+        {
+            int j=i+1;
+            while(j<n && chars[i]==chars[j])
+            {
+                j++;
+            }
+            chars[ansindex++]=chars[i];
+            int count=j-i;
+            if(count>1){
+            string str=to_string(count);
+            for(char ch:str)
+            {
+                chars[ansindex++]=ch;
+            }
+        }
+        i=j;
+        }
+        return ansindex;
+    }
+};

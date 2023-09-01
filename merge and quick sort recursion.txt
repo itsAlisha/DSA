@@ -1,0 +1,110 @@
+Q : Merge sort recursion 
+#include <iostream>
+using namespace std;
+
+void merge(int arr[],int s,int e)
+{
+    int mid=(s+e)/2;
+    int nL=mid-s+1,nR=e-mid;
+    int i=0,j=0,k=s;
+    int *L=new int[nL];
+    int *R=new int[nR];
+    
+    for(int i=0;i<nL;i++)
+    {
+        L[i]=arr[k++];
+    }
+     for(int j=0;j<nR;j++)
+    {
+        R[j]=arr[k++];
+    }
+    i=0,j=0,k=s;
+    while(i<nL&&j<nR){
+    if(L[i]<=R[j])
+    arr[k++]=L[i++];
+    else
+    arr[k++]=R[j++];}
+    while(i<nL){
+    arr[k++]=L[i++];}
+    while(j<nR){
+    arr[k++]=R[j++];}
+    
+    delete[]L;
+    delete[]R;
+}
+
+
+void mergesort(int arr[],int s,int e)
+{
+    if(s>=e)
+        return;
+    int mid=(e+s)/2;
+    
+    mergesort(arr,s,mid);
+    mergesort(arr,mid+1,e);
+    merge(arr,s,e);
+}
+
+int main()
+{
+    int n=6;
+    int arr[n]={2,9,7,6,4,3};
+    mergesort(arr,0,n-1);
+    for(int i=0;i<n;i++)
+    {
+        cout<<arr[i]<<" ";
+    }
+    return 0;
+}
+Q : Quick sort recursion 
+#include <bits/stdc++.h>
+using namespace std;
+
+int partitionindex(int arr[], int s, int e){
+    int pivot=arr[s];
+    int pivotindex=s;
+    int count=0;
+    for(int i=s+1;i<=e;i++)
+    {
+        if(arr[i]<pivot)
+        {
+            count++;
+        }
+    }
+    int i=s,j=e;
+    pivotindex=s+count;
+    swap(arr[s],arr[pivotindex]);
+    while(i<pivotindex && j>pivotindex)
+    {
+            while(arr[i]<=pivot){
+            i++;}
+            while(arr[j]>pivot){
+            j--;}
+            if(i<pivotindex && j>pivotindex)
+        swap(arr[i++],arr[j--]);
+    }
+    return pivotindex;
+}
+
+void quicksort(int arr[], int s, int e)
+{
+    if(s>e)
+    return; 
+    
+    int pivot=partitionindex(arr,s,e);
+    quicksort(arr,s,pivot-1);
+    quicksort(arr,pivot+1,e);
+}
+
+int main()
+{
+    int n=7;
+    int arr[n]={6, -6, -2, -4, -6, 2, -6};
+    quicksort(arr,0,n-1);
+    for(int i=0;i<n;i++)
+    {
+        cout<<arr[i]<<" ";
+    }
+    return 0;
+}
+

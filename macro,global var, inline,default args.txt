@@ -1,0 +1,81 @@
+--------MACROS---------
+#include <iostream>
+using namespace std;
+
+#define pi 3.14
+#define alisha 1
+#define Amu 2
+#define meghaa 14
+#define gulnaar 6
+
+int main()
+{
+    int area;
+    int r=5;
+    cout<<"Area of circle is : "<<pi*r*r<<endl;
+    cout<<"Rno of Alisha is "<<alisha<<endl;;
+    cout<<"Rno of Amu is "<<Amu<<endl;
+    cout<<"Rno of Meghaa is "<<meghaa<<endl;;
+    cout<<"Rno of Gulnaar is "<<gulnaar;
+ return 0;
+}
+--------Global Variables---------
+#include <iostream>
+using namespace std;
+
+int i=10;
+void a()
+{
+    i++;  //Global variabl got incremented
+}
+
+void b()
+{
+    i++; //Global variabe with new value getting used here
+}
+
+int main()
+{
+    a();
+    cout<<i<<endl;
+    b();
+    cout<<i<<endl;
+ return 0;
+}
+--------Inline Function---------
+#include <iostream>
+using namespace std;
+
+inline int ans(int a, int b)
+{
+    return (a>b)?a:b;
+}
+
+int main(){
+    int a=1,b=2;
+    cout<<ans(a,b)<<" is greater"<<endl;
+    
+    a=a+14;
+    b+=5;
+    cout<<ans(a,b)<<" is greater";
+ return 0;
+}
+--------Default Argument----------
+#include <iostream>
+using namespace std;
+
+void print(int arr[], int n,int start=0)
+{
+    for(int i=start;i<n;i++)
+    {
+        cout<<arr[i]<<" ";
+    }
+}
+
+int main()
+{
+    int n=10;
+    int arr[n]={1,2,3,4,5,6,7,8,9,10};
+    print(arr,n,5);
+ return 0;
+}

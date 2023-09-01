@@ -1,0 +1,50 @@
+Q : #include<iostream>
+#include<vector>
+using namespace std;
+
+bool isPossible(vector<int> &boards, int k,int n,int mid){
+    int i,b=0;
+    for(i=0;i<n;i++){
+        if(boards[i]>mid){
+        b=b+(boards[i]-mid);
+    }}
+    if(b>=k)
+    {
+        return true;
+    }
+    return false;
+}
+
+long long minmax(vector<int> &boards, int k){
+    int sum=0,mid,ans=0;
+    int n=boards.size();
+    for(int i=0;i<n;i++)
+    {
+        sum=sum+boards[i];
+    }
+    int s=0,e=sum;
+    while(s<=e){
+    mid=s+(e-s)/2;
+    if(isPossible(boards,k,n,mid))
+    {
+        ans=mid;
+        s=mid+1;
+    }
+    else{
+       e=mid-1;
+    }}
+    return ans;
+}
+
+int main()
+{
+    int k=20;
+    vector<int> boards;
+    boards.push_back(4);
+    boards.push_back(42);
+    boards.push_back(40);
+    boards.push_back(26);
+    boards.push_back(46);
+    int d=minmax(boards,k);
+    cout<<d;
+}

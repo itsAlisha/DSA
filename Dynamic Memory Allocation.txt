@@ -1,0 +1,193 @@
+Q : Referencing :
+#include <iostream>
+using namespace std;
+
+int main()
+{
+   int i=5;
+   int &j=i;
+   j++;
+   cout<<"Incrementing j increments i"<<endl;
+   cout<<j<<endl;
+   cout<<i<<endl;
+   i++;
+      cout<<"Incrementing i increments j"<<endl;
+   cout<<j<<endl;
+   cout<<i<<endl;
+    return 0;
+}
+Q : PASS BY VALUE : 
+#include <iostream>
+using namespace std;
+//PASS BY VALUE : 
+void update(int n)
+   {
+       n++;
+   }
+    
+
+int main()
+{
+    int n=5;
+    cout<<"Before : "<<n<<endl;
+    update(n);
+    cout<<"After : "<<n;
+    return 0;
+}
+Q : PASS BY REFERENCE :
+#include <iostream>
+using namespace std;
+//PASS BY REFERENCE : 
+void update(int &n)
+   {
+       n++;
+   }
+    
+
+int main()
+{
+    int n=5;
+    cout<<"Before : "<<n<<endl;
+    update(n);
+    cout<<"After : "<<n;
+    return 0;
+}
+Q :PASS BY REFERENCE : BAD PRACTICE
+#include <iostream>
+using namespace std;
+//PASS BY REFERENCE : BAD PRACTICE
+int& update(int n)
+   {
+       n++;
+       int &ans=n;
+       cout<<endl<<"Hi, i am &ans here : "<<ans<<endl<<endl;
+       return ans;  //&ans limited to this block only
+   }
+    
+
+int main()
+{
+    int n=5;
+    cout<<"Before : "<<n<<endl;
+    update(n);
+    cout<<"After : "<<n;
+    return 0;
+}
+Q : Dynamic memory allocation of 1D Array 
+#include <iostream>
+using namespace std;
+
+int getsum(int *arr, int n)
+{
+    int sum=0;
+    for(int i=0;i<n;i++){
+    sum=sum+arr[i];
+    }
+    return sum;
+}
+
+int main()
+{
+    int n;
+    cin>>n;
+    int *b=new int;
+    cout<<"Size of b : "<<sizeof(b)<<endl;
+    delete b;
+    int *arr=new int[n]; //Dynamic memory allocation of 1D Array 
+    cout<<"array print : ";
+    for(int i=0;i<n;i++)
+    {
+        cin>>arr[i];
+    }
+    for(int i=0;i<n;i++)
+    {
+        cout<<arr[i]<<",";
+    }
+    cout<<endl<<"Sum is : "<<getsum(arr,n);
+    delete[]arr;   //freeing space
+    return 0;
+}
+Q : Typecasting
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    int i=68;     //IMPLICIT Typecasting
+    char ch=i;
+    cout<<"This is implicit typecasting "<<ch<<endl;
+   
+int j=65;
+int *p=&j;
+char*pc=(char*)p; //EXPLICIT Typecasting
+cout<<"This is explicit typecasting "<<*pc;
+ return 0;
+}
+Q : 2D and 1D Arrays : 
+#include <iostream>
+using namespace std;
+
+int main()
+{
+  int row,col;
+  int n;
+  cout<<"Input n : ";
+  cin>>n;
+  
+  int *arr=new int[n];  //creating 1D Array
+  for(int i=0;i<n;i++)
+  {
+      cin>>arr[i];
+  }
+  for(int i=0;i<n;i++)
+  {
+      cout<<arr[i]<<",";
+  }
+  
+   int **arr2=new int*[n];  //creating 2D Array with same row, col
+  for(int i=0;i<n;i++)
+  {
+      arr2[i]=new int[n];
+  }
+  for(int i=0;i<n;i++)
+  {
+      for(int j=0;j<n;j++)
+      {
+          cin>>arr2[i][j];
+      }
+  }
+    for(int i=0;i<n;i++)
+  {
+      for(int j=0;j<n;j++)
+      {
+          cout<<arr2[i][j]<<" ";
+      }
+      cout<<endl;
+  }
+  
+  
+  cout<<"Input row and col : ";
+  cin>>row>>col;
+  int **arr1=new int*[row];  //creating 2D Array
+  for(int i=0;i<col;i++)
+  {
+      arr1[i]=new int[col];
+  }
+  for(int i=0;i<row;i++)
+  {
+      for(int j=0;j<col;j++)
+      {
+          cin>>arr1[i][j];
+      }
+  }
+    for(int i=0;i<row;i++)
+  {
+      for(int j=0;j<col;j++)
+      {
+          cout<<arr1[i][j]<<" ";
+      }
+      cout<<endl;
+  }
+  
+ return 0;
+}
