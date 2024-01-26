@@ -1,4 +1,4 @@
-1. Selection sort
+//1. Selection sort
 #include<bits/stdc++.h>
 using namespace std;
 
@@ -32,7 +32,7 @@ int main()
    5,6,7,9|8       minindex=3,  [8] compared w 9. 8<9 so swapped
    5,6,7,8,9 Ans
 */
-Q : Bubble Sort
+//Q : Bubble Sort
 #include<bits/stdc++.h>
 using namespace std;
 
@@ -68,7 +68,7 @@ int main()
      2,3,4|5,6   i=1,j=3
 
 */
-Q : Optimal Bubble sort :
+//Q : Optimal Bubble sort :
 #include<bits/stdc++.h>
 using namespace std;
 
@@ -97,7 +97,7 @@ int main()
         cout<<arr[i]<<" ";
     }
     return 0;}
-Q : Insertion Sort 
+//Q : Insertion Sort 
 #include <iostream>
 using namespace std;
 
